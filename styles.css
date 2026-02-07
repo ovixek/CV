@@ -1,0 +1,31 @@
+:root{
+  --bg:#ffffff; --fg:#111827; --muted:#555;
+  --accent:#0b7285; --card:#f7fbfc;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--fg);line-height:1.5;margin:0}
+.container{max-width:980px;margin:0 auto;padding:20px}
+.site-header{background:linear-gradient(90deg,#f5f8f9,#ffffff);border-bottom:1px solid #e6eef0}
+.header-inner{display:flex;justify-content:space-between;align-items:center}
+h1{font-size:28px;margin:0}
+.subtitle{color:var(--muted);margin:6px 0 0}
+.contact a{color:var(--accent);text-decoration:none}
+.header-actions button{margin-left:8px;padding:8px 12px;border-radius:6px;border:1px solid #cbd5d9;background:#fff;cursor:pointer}
+.intro{margin:20px 0}
+.grid{display:grid;grid-template-columns:300px 1fr;gap:28px}
+.left-col{background:var(--card);padding:16px;border-radius:8px}
+.left-col h3{margin-top:0}
+.skills{columns:1;padding-left:16px;margin:6px 0}
+.right-col{padding:6px 4px}
+.job{margin-bottom:18px}
+.job h4{margin:10px 0 4px}
+.meta{color:var(--muted);font-size:13px;margin-bottom:6px}
+.date{font-style:normal}
+.projects-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.proj h5{margin:4px 0}
+a{color:var(--accent)}
+.footer{margin-top:28px;padding:12px 0;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid #eef2f4}
+@media (max-width:880px){
+  .grid{grid-template-columns:1fr; }
+  .header-inner{flex-direction:column;align-items:flex-start;gap:10px}
+}
