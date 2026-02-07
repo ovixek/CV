@@ -1,5 +1,5 @@
-// small helper: open resume (replace path if you put resume in repo)
-const resumePath = 'Abhishek_Pujari_Resume.pdf'; // put your PDF in repo root or change path
+// open resume 
+const resumePath = 'Abhishek_Pujari_resume.pdf'; // put your PDF in repo root or change path
 document.getElementById('downloadResume').addEventListener('click', () => {
   window.open(resumePath, '_blank');
 });
