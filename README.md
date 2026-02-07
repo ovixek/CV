@@ -6,4 +6,4 @@ This is a static CV / portfolio website for Abhishek Pujari (Embedded Software E
 - `index.html` — main page
 - `styles.css` — styles
 - `script.js` — small interactions
-- `Abhishek_Pujari_Resume.pdf` — PDF resume
+- `Abhishek_Pujari_resume.pdf` — PDF resume
