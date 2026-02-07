@@ -1,6 +1,6 @@
 # Abhishek Pujari — CV Website
 
-This is a static CV / portfolio website for Abhishek Pujari (Embedded Software Engineer). It is built with plain HTML/CSS/JS and intended to be hosted on GitHub Pages.
+This is a static CV / portfolio website. It is built with plain HTML/CSS/JS.
 
 ## Files
 - `index.html` — main page
