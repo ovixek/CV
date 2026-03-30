@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhishek Pujari | Embedded Software Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;800&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050a0e;
+    --bg2: #080f14;
+    --surface: #0b1520;
+    --surface2: #0e1d2d;
+    --border: #1a3a55;
+    --border-glow: #00ffe7;
+    --primary: #00ffe7;
+    --primary-dim: #00ffe720;
+    --accent: #00b8ff;
+    --accent2: #7fff00;
+    --accent3: #ff6b35;
+    --text: #c8dde8;
+    --text-dim: #5a7a8a;
+    --text-bright: #e8f4ff;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Orbitron', sans-serif;
+    --body: 'Rajdhani', sans-serif;
+    --glow: 0 0 20px #00ffe740, 0 0 40px #00ffe720;
+    --glow-sm: 0 0 8px #00ffe780;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── CIRCUIT BACKGROUND ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 20%, #00ffe70a 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 80%, #00b8ff08 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 60px;
+    background: linear-gradient(180deg, #050a0eee 0%, #050a0e88 100%);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-shadow: var(--glow-sm);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.2s, text-shadow 0.2s;
+  }
+
+  .nav-links a::before { content: '> '; color: var(--primary); opacity: 0; transition: opacity 0.2s; }
+  .nav-links a:hover { color: var(--primary); text-shadow: var(--glow-sm); }
+  .nav-links a:hover::before { opacity: 1; }
+
+  /* ─── SECTIONS ─── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    opacity: 0.8;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(22px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--text-bright);
+    letter-spacing: 2px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), transparent);
+    margin-top: 12px;
+    box-shadow: var(--glow-sm);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 60px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--primary);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--primary);
+    box-shadow: var(--glow-sm);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 800;
+    color: var(--text-bright);
+    line-height: 1.1;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  h1 span {
+    color: var(--primary);
+    text-shadow: var(--glow);
+  }
+
+  .hero-role {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+
+  .hero-desc {
+    font-family: var(--body);
+    font-size: 17px;
+    color: var(--text);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 12px 28px;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--bg);
+    border: 1px solid var(--primary);
+    font-weight: 700;
+  }
+
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--primary);
+    box-shadow: var(--glow);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--border);
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--primary);
+    box-shadow: var(--glow);
+    background: var(--primary-dim);
+  }
+
+  /* ─── AVATAR ─── */
+  .avatar-wrap {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+  }
+
+  .avatar-ring {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid var(--primary);
+    opacity: 0.4;
+    animation: spin 20s linear infinite;
+  }
+
+  .avatar-ring-2 {
+    position: absolute;
+    inset: -18px;
+    border-radius: 50%;
+    border: 1px dashed var(--accent);
+    opacity: 0.2;
+    animation: spin 30s linear infinite reverse;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .avatar-inner {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 52px;
+    font-weight: 800;
+    color: var(--primary);
+    text-shadow: var(--glow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-inner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(transparent 0deg, var(--primary-dim) 60deg, transparent 120deg);
+    animation: spin 8s linear infinite;
+  }
+
+  .avatar-inner span { position: relative; z-index: 1; }
+
+  /* ─── SKILLS ─── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .skill-card:hover { border-color: var(--border-glow); transform: translateY(-2px); }
+  .skill-card:hover::before { opacity: 1; }
+
+  .skill-card-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-card-title svg { width: 14px; height: 14px; fill: var(--primary); }
+
+  .skill-item {
+    margin-bottom: 14px;
+  }
+
+  .skill-name-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .skill-pct {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+  }
+
+  .skill-bar-bg {
+    height: 3px;
+    background: var(--surface2);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    box-shadow: 0 0 6px var(--primary);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .tags-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+    background: var(--primary-dim);
+    border: 1px solid #00ffe730;
+    border-radius: 2px;
+    padding: 4px 10px;
+    letter-spacing: 1px;
+  }
+
+  .tag.accent { color: var(--accent); background: #00b8ff15; border-color: #00b8ff30; }
+  .tag.green { color: var(--accent2); background: #7fff0015; border-color: #7fff0030; }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .project-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card.teal::after { background: linear-gradient(90deg, transparent, var(--primary), transparent); }
+  .project-card.blue::after { background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .project-card.orange::after { background: linear-gradient(90deg, transparent, var(--accent3), transparent); }
+
+  .project-card:hover { transform: translateY(-4px); }
+  .project-card.teal:hover { border-color: var(--primary); box-shadow: 0 8px 40px #00ffe715; }
+  .project-card.teal:hover::after { opacity: 1; }
+  .project-card.blue:hover { border-color: var(--accent); box-shadow: 0 8px 40px #00b8ff15; }
+  .project-card.blue:hover::after { opacity: 1; }
+  .project-card.orange:hover { border-color: var(--accent3); box-shadow: 0 8px 40px #ff6b3515; }
+  .project-card.orange:hover::after { opacity: 1; }
+
+  .project-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  .project-title {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+    line-height: 1.3;
+  }
+
+  .project-subtitle {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: -8px;
+  }
+
+  .project-subtitle.teal { color: var(--primary); }
+  .project-subtitle.blue { color: var(--accent); }
+  .project-subtitle.orange { color: var(--accent3); }
+
+  .project-desc {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .project-highlights {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .project-highlights li {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .project-highlights li::before {
+    content: '▸';
+    flex-shrink: 0;
+  }
+
+  .project-highlights li.teal::before { color: var(--primary); }
+  .project-highlights li.blue::before { color: var(--accent); }
+  .project-highlights li.orange::before { color: var(--accent3); }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+  }
+
+  .project-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+  }
+
+  .project-tag.teal { color: var(--primary); background: var(--primary-dim); border: 1px solid #00ffe720; }
+  .project-tag.blue { color: var(--accent); background: #00b8ff12; border: 1px solid #00b8ff20; }
+  .project-tag.orange { color: var(--accent3); background: #ff6b3512; border: 1px solid #ff6b3520; }
+
+  .project-link {
+    font-family: var(--mono);
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    transition: gap 0.2s;
+  }
+
+  .project-link.teal { color: var(--primary); }
+  .project-link.blue { color: var(--accent); }
+  .project-link.orange { color: var(--accent3); }
+  .project-link:hover { gap: 10px; }
+
+  /* ─── TERMINAL BIO ─── */
+  .terminal-box {
+    background: #020810;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .terminal-bar {
+    background: var(--surface);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.red { background: #ff5f57; }
+  .dot.yellow { background: #ffbd2e; }
+  .dot.green { background: #28c840; }
+
+  .terminal-title {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-left: 8px;
+    letter-spacing: 1px;
+  }
+
+  .terminal-body {
+    padding: 24px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .t-prompt { color: var(--primary); }
+  .t-cmd { color: var(--text-bright); }
+  .t-out { color: var(--text-dim); display: block; padding-left: 16px; line-height: 1.8; }
+  .t-key { color: var(--accent); }
+  .t-val { color: var(--accent2); }
+  .t-comment { color: #3a5a6a; }
+
+  /* ─── EXPERIENCE / EDUCATION ─── */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg, var(--primary), var(--accent), transparent);
+    opacity: 0.4;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 36px 28px;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: var(--glow-sm);
+  }
+
+  .timeline-date {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-role {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .timeline-org {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .timeline-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    padding-bottom: 120px;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--primary);
+    transform: translateX(4px);
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 4px;
+    background: var(--primary-dim);
+    border: 1px solid #00ffe730;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .contact-value {
+    font-size: 14px;
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+
+  /* ─── CONTACT FORM ─── */
+  .contact-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--primary);
+    letter-spacing: 2px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-textarea {
+    width: 100%;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 12px 16px;
+    color: var(--text-bright);
+    font-family: var(--mono);
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary-dim);
+  }
+
+  .form-textarea { height: 120px; }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: var(--bg);
+    border: none;
+    border-radius: 2px;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .form-submit:hover {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    box-shadow: var(--glow);
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 40px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--primary); }
+
+  /* ─── STAT CHIPS ─── */
+  .hero-stats {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary);
+    text-shadow: var(--glow-sm);
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--primary);
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+
+  .fade-in { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { gap: 16px; }
+    section { padding: 80px 20px; }
+    #hero { padding-left: 20px; padding-right: 20px; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .avatar-wrap { display: none; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .divider { margin: 0 20px; }
+  }
+
+  @media (max-width: 480px) {
+    .nav-links { display: none; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AP.DEV</div>
+  <ul class="nav-links">
+    <li><a href="#about">about</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag fade-in">EMBEDDED SOFTWARE ENGINEER</div>
+      <h1 class="fade-in delay-1">ABHISHEK<br><span>PUJARI</span></h1>
+      <div class="hero-role fade-in delay-2">STM32 · CAN · ARM Cortex-M · IoT · Embedded C/C++</div>
+      <p class="hero-desc fade-in delay-3">
+        Building real-time, hardware-aware solutions that bring intelligence to electronics.
+        Currently pursuing PG-DESD at CDAC Sunbeam — writing clean firmware,
+        optimizing performance, and engineering seamless hardware-software integration.
+      </p>
+      <div class="hero-btns fade-in delay-4">
+        <a href="#projects" class="btn btn-primary">VIEW PROJECTS</a>
+        <a href="#contact" class="btn btn-ghost">GET IN TOUCH</a>
+        <a href="https://github.com/ovixek" target="_blank" class="btn btn-ghost">GITHUB ↗</a>
+      </div>
+      <div class="hero-stats fade-in delay-4">
+        <div class="stat">
+          <span class="stat-num">3+</span>
+          <span class="stat-label">MAJOR PROJECTS</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4+</span>
+          <span class="stat-label">YEARS ELECTRONICS</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">10K+</span>
+          <span class="stat-label">IMAGES PROCESSED</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">CDAC</span>
+          <span class="stat-label">PG-DESD 2025</span>
+        </div>
+      </div>
+    </div>
+    <div class="avatar-wrap fade-in delay-2">
+      <div class="avatar-ring"></div>
+      <div class="avatar-ring-2"></div>
+      <div class="avatar-inner"><span>AP</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">// ABOUT</div>
+  <div class="section-title">SYSTEM.INIT( )</div>
+
+  <div class="terminal-box">
+    <div class="terminal-bar">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+      <span class="terminal-title">abhishek@embedded:~$</span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-prompt">$ </span><span class="t-cmd">cat profile.json</span></div>
+      <span class="t-out">{</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"name"</span>: <span class="t-val">"Abhishek Pujari"</span>,</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"Embedded Software Engineer"</span>,</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-val">"Pune, Maharashtra, India"</span>,</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"education"</span>: <span class="t-val">"PG-DESD @ CDAC Sunbeam (2025)"</span>,</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"degree"</span>: <span class="t-val">"B.Tech ECE — JIST, ASTU (2025)"</span>,</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"focus"</span>: [<span class="t-val">"Firmware"</span>, <span class="t-val">"Driver Dev"</span>, <span class="t-val">"Bare-metal"</span>, <span class="t-val">"IoT"</span>, <span class="t-val">"RTOS"</span>],</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"currently_learning"</span>: [<span class="t-val">"ARM Cortex-M arch"</span>, <span class="t-val">"RTOS internals"</span>, <span class="t-val">"Embedded Linux"</span>],</span>
+      <span class="t-out">&nbsp;&nbsp;<span class="t-key">"awards"</span>: [<span class="t-val">"Anundoram Borooah Award"</span>, <span class="t-val">"CM Assam Merit Scholarship"</span>]</span>
+      <span class="t-out">}</span>
+      <div style="margin-top:8px"><span class="t-prompt">$ </span><span class="t-cmd">status --open-to-work</span></div>
+      <span class="t-out" style="color:#7fff00;">✔ Actively seeking: Embedded SW / Firmware / Driver Dev roles</span>
+      <span class="t-out t-comment"># Driver development · Bare-metal · Board bring-up · IoT edge</span>
+      <div style="margin-top:8px"><span class="t-prompt">$ </span><span class="cursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">// SKILLS</div>
+  <div class="section-title">TECH.STACK</div>
+
+  <div class="skills-grid">
+
+    <!-- Embedded & Firmware -->
+    <div class="skill-card">
+      <div class="skill-card-title">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        EMBEDDED &amp; FIRMWARE
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Embedded C / C++</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>STM32 (ARM Cortex-M4)</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Arduino / ESP32 / 8051</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>RTOS Concepts</span><span class="skill-pct">65%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Embedded Linux (basics)</span><span class="skill-pct">55%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="55"></div></div>
+      </div>
+    </div>
+
+    <!-- Protocols & Interfaces -->
+    <div class="skill-card">
+      <div class="skill-card-title">PROTOCOLS &amp; INTERFACES</div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>CAN Bus (MCP2551)</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>UART / SPI / I2C</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>MQTT / IoT Cloud</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>GPIO / Timers / PWM / ADC</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Interrupt Handling</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+    </div>
+
+    <!-- Tools & Languages -->
+    <div class="skill-card">
+      <div class="skill-card-title">TOOLS &amp; LANGUAGES</div>
+      <div class="tags-wrap">
+        <span class="tag">STM32CubeIDE</span>
+        <span class="tag">Keil uVision</span>
+        <span class="tag">Arduino IDE</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">Git</span>
+        <span class="tag">Linux CLI</span>
+        <span class="tag accent">Python</span>
+        <span class="tag accent">OpenCV</span>
+        <span class="tag accent">NumPy</span>
+        <span class="tag green">ThingsBoard</span>
+        <span class="tag green">MQTT</span>
+        <span class="tag green">Logic Analyzer</span>
+        <span class="tag green">Serial Debug</span>
+      </div>
+    </div>
+
+    <!-- AI / ML -->
+    <div class="skill-card">
+      <div class="skill-card-title">AI / MACHINE LEARNING</div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>CNN / Deep Learning</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Transfer Learning (InceptionV3)</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="70"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Computer Vision (OpenCV)</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="75"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-name-row"><span>Data Analysis (Pandas/NumPy)</span><span class="skill-pct">65%</span></div>
+        <div class="skill-bar-bg"><div class="skill-bar-fill" data-w="65"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">// PROJECTS</div>
+  <div class="section-title">BUILD.LOG</div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card teal">
+      <div class="project-num">PROJECT_01 · 12 MONTHS</div>
+      <div class="project-title">REAL-TIME DROWSINESS DETECTION & ALERT SYSTEM</div>
+      <div class="project-subtitle teal">Deep Learning · Computer Vision · Edge-Ready</div>
+      <p class="project-desc">
+        Full-pipeline driver drowsiness detection using CNN + InceptionV3 transfer learning.
+        Processes eye-state classification in real time with Haar Cascade face detection,
+        engineered for embedded/edge deployment.
+      </p>
+      <ul class="project-highlights">
+        <li class="teal">10,000+ eye images with custom augmentation pipeline</li>
+        <li class="teal">Sub-200ms inference latency per frame</li>
+        <li class="teal">30% reduction in false positives vs baseline</li>
+        <li class="teal">Real-time Haar Cascade + CNN classifier stack</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag teal">Python</span>
+        <span class="project-tag teal">OpenCV</span>
+        <span class="project-tag teal">CNN</span>
+        <span class="project-tag teal">InceptionV3</span>
+        <span class="project-tag teal">Haar Cascade</span>
+      </div>
+      <a href="https://github.com/ovixek/Graduation_Project" target="_blank" class="project-link teal">VIEW ON GITHUB →</a>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card orange">
+      <div class="project-num">PROJECT_02 · 6 MONTHS</div>
+      <div class="project-title">ANTI-SLEEP ALARM FOR DRIVERS</div>
+      <div class="project-subtitle orange">Arduino Nano · IR Sensor · Embedded C · Safety</div>
+      <p class="project-desc">
+        Hardware prototype that detects prolonged eye closure using an IR-based eye-blink
+        sensor mounted on spectacles, triggering a piezo buzzer and BO motor response
+        to alert the driver in real time.
+      </p>
+      <ul class="project-highlights">
+        <li class="orange">Interrupt-driven eye-blink detection (3s threshold)</li>
+        <li class="orange">BO motor speed reduction after 4s eye closure</li>
+        <li class="orange">25% improved sensor responsiveness</li>
+        <li class="orange">Works under low light & with spectacles</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag orange">Arduino Nano</span>
+        <span class="project-tag orange">IR Sensor</span>
+        <span class="project-tag orange">Embedded C</span>
+        <span class="project-tag orange">Relay</span>
+        <span class="project-tag orange">Piezo Buzzer</span>
+      </div>
+      <a href="https://github.com/ovixek/Graduation_mini_project" target="_blank" class="project-link orange">VIEW ON GITHUB →</a>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card blue">
+      <div class="project-num">PROJECT_03 · 6 MONTHS · CDAC MAJOR</div>
+      <div class="project-title">VEHICLE SAFETY SYSTEM USING CAN & IOT</div>
+      <div class="project-subtitle blue">STM32F407 · CAN Protocol · ESP8266 · ThingsBoard</div>
+      <p class="project-desc">
+        Safety-critical dual-node embedded system for real-time vehicle parameter monitoring
+        via CAN bus, with IoT cloud visualization. Certified by Sunbeam Infotech, Pune (Jan 2026).
+      </p>
+      <ul class="project-highlights">
+        <li class="blue">Dual STM32F407 nodes via CAN + MCP2551 transceivers</li>
+        <li class="blue">HC-SR04 obstacle detection, LM35 temp, MQ-2 gas sensors</li>
+        <li class="blue">GPS (M8N) real-time tracking + UART NMEA parsing</li>
+        <li class="blue">MQTT → ThingsBoard cloud dashboard</li>
+        <li class="blue">Buzzer alerts for obstacle / gas / thermal anomalies</li>
+      </ul>
+      <div class="project-tags">
+        <span class="project-tag blue">STM32F407</span>
+        <span class="project-tag blue">CAN / MCP2551</span>
+        <span class="project-tag blue">ESP8266</span>
+        <span class="project-tag blue">MQTT</span>
+        <span class="project-tag blue">GPS M8N</span>
+        <span class="project-tag blue">STM32CubeIDE</span>
+      </div>
+      <a href="https://github.com/ovixek/CDAC_PROJECT" target="_blank" class="project-link blue">VIEW ON GITHUB →</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">// EXPERIENCE</div>
+  <div class="section-title">EXP.LOG</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;">
+
+    <div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:3px;margin-bottom:24px;">WORK EXPERIENCE</div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">JUN 2024 – JUL 2024</div>
+          <div class="timeline-role">Summer Intern</div>
+          <div class="timeline-org">Doordarshan Kendra, Guwahati</div>
+          <div class="timeline-desc">Operated broadcasting machinery, participated in live sessions, and gained hands-on experience with hardware troubleshooting and content workflow.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">JUL 2023 – AUG 2023</div>
+          <div class="timeline-role">Internship Trainee</div>
+          <div class="timeline-org">NIELIT, Jorhat</div>
+          <div class="timeline-desc">Trained in electronics and information technology. Explored embedded systems and digital hardware fundamentals under professional guidance.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">AUG 2024 – AUG 2025</div>
+          <div class="timeline-role">President</div>
+          <div class="timeline-org">Electronics Hobby Club, JIST</div>
+          <div class="timeline-desc">Led workshops on embedded systems and circuit design for 30+ members. Revived club engagement through project-based learning initiatives.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">MAY 2023 – AUG 2024</div>
+          <div class="timeline-role">Content Writing Team Lead</div>
+          <div class="timeline-org">E-Cell, JIST</div>
+          <div class="timeline-desc">Led the content team for the Entrepreneurship Cell, producing technical and promotional content for events and workshops.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--text-dim);letter-spacing:3px;margin-bottom:24px;">EDUCATION</div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">2025</div>
+          <div class="timeline-role">PG Diploma in Embedded Systems & Design</div>
+          <div class="timeline-org">CDAC Sunbeam — Sunbeam Infotech, Pune & Karad</div>
+          <div class="timeline-desc">Specialized in Embedded C, ARM Cortex-M, RTOS, CAN protocol, Linux basics, IoT, and firmware architecture. Major project: Vehicle Safety System.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2021 – 2025</div>
+          <div class="timeline-role">B.Tech — Electronics & Telecommunication Engineering</div>
+          <div class="timeline-org">Jorhat Institute of Science & Technology (ASTU)</div>
+          <div class="timeline-desc">Core studies in ECE with hands-on embedded projects. Served as Department Representative. Mini project: Anti-Sleep Alarm for Drivers.</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">2019 – 2021</div>
+          <div class="timeline-role">10+2 (Science)</div>
+          <div class="timeline-org">Radiant Junior College, Dergaon</div>
+          <div class="timeline-desc">Awarded Anundoram Borooah Award and Chief Minister of Assam Special Merit Scholarship for academic excellence.</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">// CONTACT</div>
+  <div class="section-title">INIT.HANDSHAKE</div>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p style="font-size:15px;color:var(--text);margin-bottom:16px;font-weight:300;line-height:1.7;">
+        Open to opportunities in <strong style="color:var(--primary)">Embedded Software / Firmware Engineering</strong>,
+        Driver Development, Board Bring-up, IoT Edge, and Automotive Embedded Systems.
+      </p>
+
+      <a href="mailto:abhishekpujari03@gmail.com" class="contact-item">
+        <div class="contact-icon">@</div>
+        <div>
+          <span class="contact-label">EMAIL</span>
+          <span class="contact-value">abhishekpujari03@gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://www.linkedin.com/in/abhishekpujari-0a46aa21b" target="_blank" class="contact-item">
+        <div class="contact-icon">in</div>
+        <div>
+          <span class="contact-label">LINKEDIN</span>
+          <span class="contact-value">abhishekpujari-0a46aa21b</span>
+        </div>
+      </a>
+
+      <a href="https://github.com/ovixek" target="_blank" class="contact-item">
+        <div class="contact-icon">&lt;/&gt;</div>
+        <div>
+          <span class="contact-label">GITHUB</span>
+          <span class="contact-value">github.com/ovixek</span>
+        </div>
+      </a>
+
+      <div class="contact-item" style="cursor:default;">
+        <div class="contact-icon">📍</div>
+        <div>
+          <span class="contact-label">LOCATION</span>
+          <span class="contact-value">Pune, Maharashtra, India</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label class="form-label">YOUR_NAME</label>
+        <input type="text" class="form-input" placeholder="John Doe">
+      </div>
+      <div class="form-group">
+        <label class="form-label">YOUR_EMAIL</label>
+        <input type="email" class="form-input" placeholder="john@company.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">MESSAGE</label>
+        <textarea class="form-textarea" placeholder="Hi Abhishek, we'd love to discuss..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleFormSubmit(this)">SEND_MESSAGE( )</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>ABHISHEK PUJARI</span> · EMBEDDED SOFTWARE ENGINEER · 2025 · BUILT WITH <span>01001100</span>
+</footer>
+
+<script>
+  // Animate skill bars on scroll
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.dataset.w + '%';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => observer.observe(b));
+
+  // Form submit handler
+  function handleFormSubmit(btn) {
+    const form = btn.closest('.contact-form');
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const msg = form.querySelector('textarea').value.trim();
+    if (!name || !email || !msg) {
+      btn.textContent = 'FILL_ALL_FIELDS( )';
+      setTimeout(() => btn.textContent = 'SEND_MESSAGE( )', 2000);
+      return;
+    }
+    btn.textContent = 'TRANSMITTING...';
+    setTimeout(() => {
+      btn.textContent = 'MESSAGE_SENT ✓';
+      btn.style.background = 'var(--accent2)';
+      btn.style.color = 'var(--bg)';
+      form.querySelectorAll('input,textarea').forEach(el => el.value = '');
+      setTimeout(() => {
+        btn.textContent = 'SEND_MESSAGE( )';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 3500);
+    }, 1500);
+  }
+
+  // Circuit trace animation on nav links
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
